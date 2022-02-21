@@ -5,8 +5,15 @@
 You will need to install dependencies
 
 ```shell
-pip install -r requirements.py
+pip install -r requirements.txt
 ```
+
+## Run
+
+```shell
+python main.py
+```
+
 
 ## Test
 
