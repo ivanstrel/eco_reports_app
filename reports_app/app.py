@@ -1,9 +1,11 @@
 import sys
 from docxtpl import DocxTemplate
+from PyQt5.QtCore import QDate
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 from darktheme.widget_template import DarkPalette
 # Import UI
 from reports_app.ui.main_window_ui import Ui_MainWindow
+from datetime import datetime
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -11,13 +13,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__()
         self.setupUi(self)
         self.report_pushButton.clicked.connect(self.generate_report)
+        # Set current date
+        self.report_dat_dateEdit.setDate(QDate(datetime.now()))
 
     def generate_report(self):
         context = {
             "report_date": self.report_dat_dateEdit.date().toPyDate().strftime("%Y.%m.%d"),
             "start_time": self.measure_start_timeEdit.time().toString("hh.mm"),
             "end_time": self.measure_start_timeEdit.time().toString("hh.mm"),
-            "obj_name": self.object_name_lineEdit.text(),
+            "obj_name": self.object_name_textEdit.text(),
             "report_n": self.report_name_spinBox.text(),
         }
 
